@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-int a=0;
-int max_VPB=10;
-int min_VPB=0;
+#define MAX_VPB 10
+#define MIN_VPB 0
+
+ int a=0;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,12 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->pushButton->setText("Кнопка для прогресс бара");
-    //ui->pushButton->setC(true);
 
 
 
-    ui->progressBar->setMaximum(max_VPB);
-    ui->progressBar->setMinimum(min_VPB);
+    ui->progressBar->setMaximum(MAX_VPB);
+    ui->progressBar->setMinimum(MIN_VPB);
     ui->progressBar->value();
     ui->progressBar->setValue(0);
     ui->progressBar->setFormat("%p%");
@@ -38,10 +38,12 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_pushButton_toggled(bool checked)
 {
-    if(a==max_VPB)a=min_VPB;
     a++;
+    if( a>MAX_VPB) a=MIN_VPB;
+
     ui->progressBar->setValue(a);
 
 }
